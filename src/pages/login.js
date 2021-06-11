@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 // Components
 import NavBar from '../components/NavBar';
@@ -12,17 +13,12 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import withStyles from '@material-ui/core/styles/withStyles'
-
-const styles = {
-
-}
 
 export class login extends Component {
     constructor() {
@@ -40,11 +36,17 @@ export class login extends Component {
             password: this.state.password
         };
 
-        this.props.loginUser(loginData, this.props.history);
+        this.props.loginUser(loginData);
     }
 
     handleSetEmployee = (event, newStatus) => {
         this.props.setEmployee(newStatus);
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
     }
 
     render() {
@@ -58,7 +60,12 @@ export class login extends Component {
                     <Grid item sm />
                     <Grid item sm>
                         <Paper elevation={3}>
-                            <Grid container justify="center" alignItems="center" style={{height: '400px'}}>
+                            <Grid container justify="center" alignItems="center" style={{height: '500px'}}>
+                                <Grid item>
+                                    <Typography variant='h4' style={{margin: '20px 150px auto 150px'}}>
+                                        Log In
+                                    </Typography>
+                                </Grid>
                                 <Grid item>
                                     <ToggleButtonGroup value={isEmployee} exclusive onChange={this.handleSetEmployee}>
                                         <ToggleButton value={false}>
@@ -69,12 +76,46 @@ export class login extends Component {
                                         </ToggleButton>
                                     </ToggleButtonGroup>
                                 </Grid>
+                                <TextField
+                                    id="username"
+                                    name="username"
+                                    type="username"
+                                    label="Username"
+                                    error={loginError}
+                                    value={username}
+                                    onChange={this.handleChange}
+                                    style={{ width: '300px', margin: '30px 20px 30px 40px' }}
+                                />
+                                <TextField
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    label="Password"
+                                    error={loginError}
+                                    value={password}
+                                    helperText={loginError ? "Invalid credentials" : null}
+                                    onChange={this.handleChange}
+                                    style={{ width: '300px', margin: '30px 20px 50px 40px' }}
+                                />
                                 <Grid item>
-                                    <Typography>
+                                    <Button
+                                        type="submit"
+                                        variant="contained"
+                                        disabled={loading}
+                                        style={{marginBottom: '20px'}}
+                                        onClick={this.handleLogin}
+                                    >
                                         Log In
-                                    </Typography>
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        component={Link}
+                                        to="/signup"
+                                        style={{ marginLeft: '40px', marginBottom: '20px'}}
+                                    >
+                                        Sign Up
+                                    </Button>
                                 </Grid>
-
                             </Grid>
                         </Paper>
                     </Grid>

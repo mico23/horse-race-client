@@ -22,17 +22,17 @@ export class NavBar extends Component {
         const {authenticated} = this.props;
 
         return (
-            <AppBar style={{maxHeight: 40}}>
+            <AppBar style={{maxHeight: 50}}>
                 <Toolbar>
                     <Grid justify="space-between" alignItems="center" container>
-                        <Grid item>
-                            <Typography>
-                                Horse Racing
+                        <Grid item style={{marginBottom: '10px'}}>
+                            <Typography variant="h5">
+                                HORSE RACING
                             </Typography>
                         </Grid>
                         <Grid item>
                             {authenticated && (
-                                <Button onClick={this.handleLogout} size="small" component={Link} to="/login">
+                                <Button onClick={this.handleLogout} size="small" component={Link} to="/">
                                     Log Out
                                 </Button>
                             )}

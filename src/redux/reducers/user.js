@@ -24,7 +24,8 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                authenticated: true
+                authenticated: true,
+                loginError: false
             };
         case LOGIN_ERROR:
             return {
