@@ -8,17 +8,17 @@ import {
 import axios from 'axios';
 
 // Logs user in
-export const loginUser = (userData, history) => (dispatch) => {
+export const loginUser = (userData) => (dispatch) => {
     dispatch({type: LOADING_USER});
 
     const username = userData.username;
     const password = userData.password;
 
     axios
-        .get(`/user/login.php?username='${username}'&password=${password}`)
+        .get(`/user/login.php?username='${username}'&password='${password}'`)
         .then((res) => {
             dispatch({type: AUTHENTICATE});
-            history.push('/');
+            console.log("Authenticated");
         })
         .catch((err) => {
             dispatch({type: LOGIN_ERROR});
