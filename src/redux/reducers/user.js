@@ -3,13 +3,18 @@ import {
     AUTHENTICATE,
     LOGIN_ERROR,
     SET_EMPLOYEE,
-    LOGOUT
+    LOGOUT,
+    SIGNUP_USER,
+    SIGNUP_ERROR
 } from '../types';
 
 const initialState = {
+    username: "",
+    user: {},       // Signup info, includes username, password, name, address, fee, type
     authenticated: false,
     loading: false,
     loginError: false,
+    signupError: false,
     isEmployee: false
 }
 
@@ -25,7 +30,8 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: false,
                 authenticated: true,
-                loginError: false
+                loginError: false,
+                username: action.payload
             };
         case LOGIN_ERROR:
             return {
@@ -43,6 +49,20 @@ export default function (state = initialState, action) {
                 ...state,
                 authenticated: false
             }
+        case SIGNUP_USER:
+            return {
+                ...state,
+                loading: false,
+                username: action.payload.username,
+                user: action.payload,
+                authenticated: true,
+                signupError: false
+            };
+        case SIGNUP_ERROR:
+            return {
+                ...state,
+                signupError: true
+            };
         default:
             return state;
     }

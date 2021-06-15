@@ -3,7 +3,9 @@ import {
     AUTHENTICATE,
     LOGIN_ERROR,
     SET_EMPLOYEE,
-    LOGOUT
+    LOGOUT,
+    SIGNUP_USER,
+    SIGNUP_ERROR
 } from '../types';
 import axios from 'axios';
 
@@ -15,9 +17,12 @@ export const loginUser = (userData) => (dispatch) => {
     const password = userData.password;
 
     axios
-        .get(`/user/login.php?username='${username}'&password='${password}'`)
+        .get(`/users/login.php?username='${username}'&password='${password}'`)
         .then((res) => {
-            dispatch({type: AUTHENTICATE});
+            dispatch({
+                type: AUTHENTICATE,
+                payload: username
+            });
             console.log("Authenticated");
         })
         .catch((err) => {
@@ -39,6 +44,18 @@ export const logoutUser = (dispatch) => {
 }
 
 // Signs user up
-export const signupUser = (userData, history) => (dispatch) => {
+export const signupUser = (userData) => (dispatch) => {
     dispatch({type: LOADING_USER});
+
+    axios
+        .post('/customer/signup.php', userData)
+        .then((res) => {
+            dispatch({
+                type: SIGNUP_USER,
+                payload: userData
+            });
+        })
+        .catch((err) => {
+            dispatch({type: SIGNUP_ERROR});
+        });
 }
