@@ -15,8 +15,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
@@ -25,8 +23,7 @@ export class login extends Component {
         super();
         this.state = {
             username: "",
-            password: "",
-            error: false
+            password: ""
         }
     }
 
@@ -50,8 +47,8 @@ export class login extends Component {
     }
 
     render() {
-        const {classes, user: {loading, isEmployee, loginError}} = this.props;
-        const {username, password, error} = this.state;
+        const {user: {loading, isEmployee, loginError}} = this.props;
+        const {username, password} = this.state;
 
         return (
             <div>
@@ -106,10 +103,13 @@ export class login extends Component {
                                         onClick={this.handleLogin}
                                     >
                                         Log In
+                                        {loading && (
+                                            <LinearProgress style={{marginLeft: '5px', width: '30px'}}/>
+                                        )}
                                     </Button>
                                     <Button
                                         variant="outlined"
-                                        component={Link}
+                                        component={ Link }
                                         to="/signup"
                                         style={{ marginLeft: '40px', marginBottom: '20px'}}
                                     >
