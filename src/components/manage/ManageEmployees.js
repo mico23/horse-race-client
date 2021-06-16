@@ -61,66 +61,57 @@ export class ManageEmployees extends Component {
       this.props.fetchSingleEmployeeInfo(accountid);
     }
 
-    renderEmpInfo(classes, curEmployee) {
+    renderEmpInfo(curEmployee) {
       return (
-        <Card className={classes.listRoot} variant="outlined">
-          <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Employee Name
-            </Typography>
-            <Typography variant="h6" component="h2" gutterBottom>
-              {curEmployee.curEmpName}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Employee ID
-            </Typography>
-            <Typography variant="body1" component="p" gutterBottom>
-              {curEmployee.curEmpAccountID}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Position
-            </Typography>
-            <Typography variant="body1" component="p" gutterBottom>
-              {curEmployee.curEmpType}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Level
-            </Typography>
-            <Typography variant="body1" component="p" gutterBottom>
-              {curEmployee.curEmpLevel}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Salary
-            </Typography>
-            <Typography variant="body1" component="p" gutterBottom>
-              {curEmployee.curEmpSalary}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Starting Date
-            </Typography>
-            <Typography variant="body1" component="p" gutterBottom>
-              {curEmployee.curEmpStartDate}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            {/* changed "PROMOTE" to "ADD" */}
-            <Button size="small" color="primary" onClick={(event) => this.handleManage(event)}>Add</Button>
-            <Button size="small" color="primary" onClick={(event) => this.handleDelete(event)}>Delete</Button>
-          </CardActions>
-        </Card>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Employee Name
+          </Typography>
+          <Typography variant="h6" component="h2" gutterBottom>
+            {curEmployee.curEmpName}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Employee ID
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {curEmployee.curEmpAccountID}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Position
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {curEmployee.curEmpType}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Level
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {curEmployee.curEmpLevel}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Salary
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {curEmployee.curEmpSalary}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Starting Date
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {curEmployee.curEmpStartDate}
+          </Typography>
+        </CardContent>
       )
     }
 
     // ** this is not displayed properly. I will fix it later.
-    displayDefaultMessage(classes) {
+    displayDefaultMessage() {
       return (
-        <Card className={classes.listRoot} variant="outlined">
-          <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Please select an Employee.
-            </Typography>
-          </CardContent>
-        </Card>
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Please select an Employee.
+          </Typography>
+        </CardContent>
       )
     }
     
@@ -154,9 +145,16 @@ export class ManageEmployees extends Component {
                 <Typography variant="h5" gutterBottom>
                   Employee Info
                 </Typography>
-                {
-                  curEmpAccountID != 0 ? this.renderEmpInfo(classes, curEmployee) : this.displayDefaultMessage(classes)
-                }
+                <Card className={classes.listRoot} variant="outlined">
+                  {
+                    curEmpAccountID != 0 ? this.renderEmpInfo(curEmployee) : this.displayDefaultMessage()
+                  }
+                  <CardActions>
+                    {/* changed "PROMOTE" to "ADD" */}
+                    <Button size="small" color="primary" onClick={(event) => this.handleManage(event)}>Add</Button>
+                    <Button size="small" color="primary" onClick={(event) => this.handleDelete(event)}>Delete</Button>
+                  </CardActions>
+                </Card>
               </Grid>
               
               <Grid item xs={12}>

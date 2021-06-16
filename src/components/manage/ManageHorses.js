@@ -55,8 +55,9 @@ export class ManageHorses extends Component {
       // see from General
     }
 
-    handleListItemClick = (event, index) => {
+    handleListItemClick = (horseID) => {
         // setSelectedIndex(index);
+        console.log(horseID)
     }
     
     selectedIndex = ()=> {
@@ -84,7 +85,7 @@ export class ManageHorses extends Component {
                       key={value.horseID} 
                       role={undefined} 
                       button
-                      onClick={(event) => this.handleListItemClick(event, value)}>
+                      onClick={(event) => this.handleListItemClick(value.horseID)}>
                       <ListItemText id={labelId} primary={value.nickname}/>
                     </ListItem>
                   );
