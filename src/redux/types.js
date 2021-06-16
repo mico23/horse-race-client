@@ -23,3 +23,5 @@ export const SET_RACE_LOCATION = 'SET_RACE_LOCATION';
 export const OPEN_ADD_FUND = 'OPEN_ADD_FUND';
 export const CLOSE_ADD_FUND = 'CLOSE_ADD_FUND';
 export const ADD_FUND = 'ADD_FUND';
+export const BET_DETAILS = 'BET_DETAILS';
+export const NO_HORSES_REGISTERED = 'NO_HORSES_REGISTERED';

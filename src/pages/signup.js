@@ -70,7 +70,6 @@ export class signup extends Component {
             type: event.target.value,
             fee: feeType[event.target.value]
         });
-        console.log(this.state);
     }
 
     render() {

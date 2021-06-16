@@ -27,8 +27,9 @@ const styles = (theme) => ({
 export class DetailWindow extends Component {
 
     componentDidMount() {
-        this.props.fetchBetInfo('1');
-        console.log(this.props.bets);
+        const {customer: {accountID}} = this.props;
+
+        this.props.fetchBetInfo(accountID);
     }
     
     render() {
@@ -59,6 +60,7 @@ export class DetailWindow extends Component {
 }
 
 const mapStateToProps = state => ({
+    customer: state.customer,
     bets: state.custBet.bets
 })
 

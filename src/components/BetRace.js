@@ -15,12 +15,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import { connect } from 'react-redux';
-import { fetchRaceInfo, setBetTrue, setBetFalse } from '../redux/actions/raceInfoAction';
-/*
-Icon Reference:
-https://material-ui.com/components/material-icons/
-*/
+import { fetchRaceInfo, setBetTrue, setBetFalse, setBetDetails } from '../redux/actions/raceInfoAction';
+import { makeBet } from '../redux/actions/custBetAction';
+
 const styles = (theme) => ({
     root: {
         width: '100%',
@@ -29,29 +29,33 @@ const styles = (theme) => ({
         position: 'relative',
         overflow: 'auto',
         height: 300,
-      },
-      title: {
+    },
+    title: {
         margin: (4, 0, 2),
-      },
-  });
+    },
+});
+
+const betTypes = {
+    'Show': "'show bet'",
+    'Place': "'place bet'",
+    'Win': "'win bet'",
+}
 
 export class BetRace extends Component {
     constructor() {
         super();
         this.state = {
-          amount: 0,
-          invalid: false,
+            amount: 0,
+            bettype: "Win",
+            invalid: false,
         }
     }
 
-    handleClick = () => {
-        console.log('clicked');
-    }
-
-    handleClickOpen = () => {
+    handleClickOpen = (data) => {
         this.props.setBetTrue();
-      };
-    
+        this.props.setBetDetails(data);
+    };
+
     handleClose = () => {
         this.props.setBetFalse();
     };
@@ -62,39 +66,46 @@ export class BetRace extends Component {
         this.setState({
             [event.target.name]: event.target.value
         });
-        if(this.state.amount<0){
-            this.setState({invalid:true})
+        if (this.state.amount < 0) {
+            this.setState({ invalid: true })
         } else {
-            this.setState({invalid:false})
+            this.setState({ invalid: false })
         }
     };
 
-    handleTransaction = ()=> {
-        console.log("clicked submit")
-        /*
-        {
-            "horseid": 1,
-            "accountid": 1,
-            "amount": 100,
-            "bettype": "'win bet'",
-            "raceid": 1
+    handleDropdownChange = (event) => {
+        this.setState({
+            bettype: event.target.value
+        })
+    }
+
+    handleTransaction = () => {
+        const {raceInfo: {selectedHorse, selectedRace}, customer: {accountID}} = this.props;
+        const {amount, bettype} = this.state;
+        const betData = {
+            "horseid": parseInt(selectedHorse),
+            "accountid": accountID,
+            "amount": amount,
+            "bettype": betTypes[bettype],
+            "raceid": parseInt(selectedRace)
         }
-        */
+        this.props.makeBet(betData);
+        this.handleClose();
     }
 
     renderRow(races) {
-        return races.map((data)=> (
+        return races.map((data) => (
             <ListItem key={data.horseid}>
                 <ListItemText primary={`${data.nickname} with odds ${data.odds}; number of races: ${data.number_of_races}`} />
                 <ListItemSecondaryAction>
-                    <IconButton 
-                    onClick={this.handleClickOpen}
-                    edge="end" 
-                    aria-label="comments">
-                        <AttachMoney/>
+                    <IconButton
+                        onClick={() => this.handleClickOpen(data)}
+                        edge="end"
+                        aria-label="comments">
+                        <AttachMoney />
                     </IconButton>
                 </ListItemSecondaryAction>
-            </ListItem>      
+            </ListItem>
         ))
     }
 
@@ -106,68 +117,88 @@ export class BetRace extends Component {
         )
     }
 
+    renderNoHorsesMessage() {
+        return (
+            <ListItem key={0}>
+                <ListItemText primary={`No horses are registered yet for this race.`} />
+            </ListItem>
+        )
+    }
+
     render() {
-        // this is required to refer styles
-        const {classes, races, bet, selectedHorse} = this.props;
-        const {amount, invalid} = this.state;
-        
+        const { classes, bet, raceInfo: {races, selectedHorse, noHorsesRegistered} } = this.props;
+        const { amount, bettype, invalid } = this.state;
+
         return (
             <div>
                 <Grid item xs={12} md={6}>
                     <Typography variant="h6" className={classes.title}>
-                            Available Bets
+                        Available Bets
                     </Typography>
                     <List className={classes.root} subheader={<li />}>
-                    {
-                        races.length ? this.renderRow(races) : this.renderDefaultMessage()
-                    }
+                        {
+                            races.length ? (noHorsesRegistered ? this.renderNoHorsesMessage() : this.renderRow(races)) : this.renderDefaultMessage()
+                        }
                     </List>
                 </Grid>
 
                 <Dialog open={bet} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Make Your Bet on Horse ID: {selectedHorse}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                    Please enter the amount.
-                    </DialogContentText>
-                    <TextField
-                    error={invalid}
-                    autoFocus
-                    margin="dense"
-                    id="addFund"
-                    name="amount"
-                    type="number"
-                    value={amount}
-                    onChange={this.handleChange}
-                    fullWidth
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.handleClose} color="primary">
-                    Cancel
-                    </Button>
-                    <Button onClick={this.handleTransaction} color="primary">
-                    Submit
-                    </Button>
-                </DialogActions>
+                    <DialogTitle id="form-dialog-title">Make Your Bet on Horse ID: {selectedHorse}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Please enter the amount and type of bet.
+                        </DialogContentText>
+                        <TextField
+                            error={invalid}
+                            autoFocus
+                            margin="dense"
+                            id="addFund"
+                            name="amount"
+                            type="number"
+                            value={amount}
+                            onChange={this.handleChange}
+                            fullWidth
+                        />
+                        <Select
+                            labelId="type"
+                            id="type"
+                            value={bettype}
+                            onChange={this.handleDropdownChange}
+                            style={{margin: '10px auto 10px auto'}}
+                            fullWidth
+                        >
+                            <MenuItem value={'Win'}>Win</MenuItem>
+                            <MenuItem value={'Place'}>Place</MenuItem>
+                            <MenuItem value={'Show'}>Show</MenuItem>
+                        </Select>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.handleTransaction} color="primary">
+                            Submit
+                        </Button>
+                    </DialogActions>
                 </Dialog>
             </div>
         )
     }
 }
 
-const mapStateToProps = state => ({
-    // customer: state.customer,balance,
+const mapStateToProps = (state) => ({
+    customer: state.customer,
     stadiums: state.raceInfo.stadiums,
-    races: state.raceInfo.races,
     bet: state.raceInfo.bet,
-    selectedHorse: state.raceInfo.selectedHorse
+    raceInfo: state.raceInfo
 })
 
 const mapActionsToProps = {
     fetchRaceInfo,
     setBetTrue,
-    setBetFalse
+    setBetFalse,
+    setBetDetails,
+    makeBet
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(BetRace));

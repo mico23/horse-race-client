@@ -23,11 +23,9 @@ const styles = (theme) => ({
 export class MakeBetPage extends Component {
 
     componentDidMount() {
-        // load stadium and bet history info from api
+        const {customer: {accountID}} = this.props;
         this.props.fetchRaceStadiumInfo();
-        // this.props.fetchBetInfo(this.props.accountID);
-        // set to 1 for testing
-        this.props.fetchBetInfo(1);
+        this.props.fetchBetInfo(accountID);
     }
 
     render() {
@@ -70,7 +68,7 @@ export class MakeBetPage extends Component {
 
 const mapStateToProps = state => ({
     stadiums: state.raceInfo.stadiums,
-    customer: state.customer.accountID
+    customer: state.customer
 })
 
 const mapActionsToProps = {

@@ -5,13 +5,11 @@ import {
 import axios from 'axios';
 
 export const fetchBetInfo = (accountid) => (dispatch) => {
-    console.log('fetching betInfo');
     const id = parseInt(accountid);
     
     axios
         .get(`/transaction/customerBetInfo.php?accountid=${id}`)
         .then((res) => {
-            // console.log(res.data.records);
             dispatch({
                 type: CUSTOMER_BET_INFO,
                 payload: res.data.records
@@ -21,5 +19,16 @@ export const fetchBetInfo = (accountid) => (dispatch) => {
             dispatch({
                 type: CUSTOMER_BET_INFO_FAIL
             })
+        })
+}
+
+export const makeBet = (betData) => (dispatch) => {
+    axios
+        .post(`transaction/makeBet.php`, betData)
+        .then((res) => {
+            dispatch(fetchBetInfo(betData.accountID));
+        })
+        .catch((err) => {
+            console.log(err);
         })
 }

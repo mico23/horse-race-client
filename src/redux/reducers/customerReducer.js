@@ -10,7 +10,7 @@ import {
 
 const initialState = {
     accountID: "",
-    memberID:"",
+    memberID: "",
     username: "",
     name: "",
     address: "",
@@ -25,8 +25,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 accountID: action.payload.accountID,
-                //somehow not being able to retrieve memberID
-                // memberID: action.playload.memberID,
+                memberID: action.payload.memberID,
                 username: action.payload.username,
                 name: action.payload.name,
                 address: action.payload.address,
