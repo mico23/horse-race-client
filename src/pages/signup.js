@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar';
 
 // Redux
 import { connect } from 'react-redux';
-import { signupUser } from '../redux/actions/user';
+import { signupUser } from '../redux/actions/userAction';
 
 // Material UI
 import withStyles from '@material-ui/core/styles/withStyles'

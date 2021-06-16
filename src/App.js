@@ -5,6 +5,8 @@ import axios from 'axios';
 // Pages
 import login from './pages/login';
 import signup from './pages/signup';
+import customer from './pages/customer'
+import bet from './pages/bet'
 
 // Redux
 import { Provider } from 'react-redux';
@@ -19,6 +21,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={login}/>
             <Route exact path="/signup" component={signup}/>
+            <Route exact path = "/customer" component = {customer}/>
+            <Route exact path = "/bet" component = {bet}/>
           </Switch>
       </Router>
     </Provider>
