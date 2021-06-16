@@ -6,6 +6,7 @@ import customer from './reducers/customerReducer';
 import custBet from './reducers/custBetReducer';
 import raceInfo from './reducers/raceInfoReducer';
 import employee from './reducers/employeeReducer';
+import horsesInfo from './reducers/horseReducer';
 
 const initialState = {};
 
@@ -16,7 +17,8 @@ const reducers = combineReducers({
     customer: customer,
     custBet: custBet,
     raceInfo: raceInfo,
-    employee: employee
+    employee: employee,
+    horsesInfo: horsesInfo
 })
 
 // added compose to enable Chrome exstension for debugging purpose

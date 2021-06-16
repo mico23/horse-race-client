@@ -8,6 +8,7 @@ import signup from './pages/signup';
 import customer from './pages/customer'
 import bet from './pages/bet'
 import EmployeeManager from './pages/EmployeeManager'
+import EmployeeRegular from './pages/EmployeeRegular';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -28,6 +29,7 @@ function App() {
             <Route exact path = "/customer" component = {customer}/>
             <Route exact path = "/bet" component = {bet}/>
             <Route path = "/EmployeeManager" component = {EmployeeManager}/>
+            <Route path = "/EmployeeRegular" component = {EmployeeRegular}/>
           </Switch>
       </Router>
     </Provider>

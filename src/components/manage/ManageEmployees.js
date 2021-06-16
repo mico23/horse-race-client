@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { setCurEmpAccountID, fetchSingleEmployeeInfo } from '../../redux/actions/employeeAction';
 
@@ -40,10 +40,12 @@ export class ManageEmployees extends Component {
         }
     }
 
+    // not used
     handleManage = (event) => {
       this.setState({openEdit:true})
     }
-
+    
+    // not used
     handleDelete = (event) => {
       // delete
     }
@@ -52,10 +54,9 @@ export class ManageEmployees extends Component {
       this.setState({openAdd:true})
     }
 
-    // add actioner for this
     handleListItemClick = (accountid) => {
       //display info
-      console.log(accountid);
+      // console.log(accountid);
       this.props.setCurEmpAccountID(accountid);
       this.props.fetchSingleEmployeeInfo(accountid);
     }
@@ -137,7 +138,8 @@ export class ManageEmployees extends Component {
                   {employees.map((value) => {
                     const labelId = `checkbox-list-label-${value.accountID}`;
                     return (
-                      <ListItem key={value.accountID} role={undefined} 
+                      <ListItem key={value.accountID} 
+                                role={undefined} 
                                 button
                                 onClick={() => this.handleListItemClick(value.accountID)}>
                         <ListItemText id={labelId} primary={`EmployeeID: ${value.accountID} | Name: ${value.name}`} />
