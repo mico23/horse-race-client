@@ -25,3 +25,29 @@ export const CLOSE_ADD_FUND = 'CLOSE_ADD_FUND';
 export const ADD_FUND = 'ADD_FUND';
 export const BET_DETAILS = 'BET_DETAILS';
 export const NO_HORSES_REGISTERED = 'NO_HORSES_REGISTERED';
+
+// new types from Jenny's code
+export const ALL_EMPLOYEE = 'ALL_EMPLOYEE';
+export const ALL_EMPLOYEE_FAIL = 'ALL_EMPLOYEE_FAIL';
+
+export const EMPLOYEE_INFO = 'EMPLOYEE_INFO';
+export const EMPLOYEE_INFO_FAIL = 'EMPLOYEE_INFO_FAIL';
+
+export const SET_CUR_EMP_ACC_ID = 'SET_CUR_EMP_ACC_ID';
+
+// types I'm currently working on
+export const HORSE_INFO = 'HORSE_INFO';
+export const HORSE_INFO_FAIL = 'HORSE_INFO_FAIL';
+
+// new types in Jenny's file - not used yet
+
+export const OPEN_ADD_E = 'OPEN_ADD_E';
+export const CLOSE_ADD_E = 'CLOSE_ADD_E';
+export const ADD_EMPLOYEE = 'ADD_EMPLOYEE';
+export const EDIT_EMPLOYEE = 'EDIT_EMPLOYEE';
+
+export const ADD_HORSE = 'ADD_HORSE';
+export const ADD_JOCKEY = 'ADD_JOCKEY';
+export const ADD_SUPPLIER = 'ADD_SUPPLIER';
+export const ADD_STADIUM = 'ADD_STADIUM';
+export const ADD_RACE = 'ADD_RACE';
