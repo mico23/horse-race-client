@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import NavBarLP from '../components/NavBarLP';
 
 // Components
-import AddHorse from '../components/add/AddHorse';
 import ManageHorses from '../components/manage/ManageHorses';
-import AddJockey from '../components/add/AddJockey';
 import ManageJockeys from '../components/manage/ManageJockeys';
-import AddRace from '../components/add/AddRace';
 import ManageRaces from '../components/manage/ManageRaces';
-import AddStadium from '../components/add/AddStadium';
 import ManageStadiums from '../components/manage/ManageStadiums';
+import ManageSuppliers from '../components/manage/ManageSuppliers';
 
 // redux
 import { connect } from 'react-redux';
@@ -27,16 +24,14 @@ export class EmployeeRegular extends Component {
             <div>
                 <NavBarLP/>
                 <ManageHorses/>
-                {/* <AddHorse/> */}
 
-                {/* <ManageJockeys/> */}
-                {/* <AddJockey/> */}
+                <ManageJockeys/>
 
-                {/* <ManageRaces/> */}
-                {/* <AddRace/> */}
+                <ManageRaces/>
 
-                {/* <ManageStadiums/> */}
-                {/* <AddStadium/> */}
+                <ManageStadiums/>
+
+                <ManageSuppliers/>
             </div>
         )
     }

@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { setCurHorseID, fetchSingleHorse } from '../../redux/actions/horseAction';
 
 import { 
-    Button, 
     Grid,
     Typography, 
     List, ListItem, ListItemText, 
-    Card, CardContent, CardActions
+    Card, CardContent
 } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 
@@ -32,34 +31,6 @@ const styles = (theme) => ({
 
 
 export class ManageHorses extends Component {
-    constructor() {
-        super();
-        this.state = {
-            hname: "",
-            hid: "",
-            breed: "",
-            age: "",
-            odds: null,
-            numraces: 0,
-            error: false
-        }
-    }
-
-    handleManage = (event) => {
-      // pops up edit dialog
-    }
-
-    handleDelete = (event) => {
-      // pops up warning dialog
-    }
-
-    handleOpenDialog = (event, edata) => {
-      // see from General
-    }
-
-    selectedIndex = ()=> {
-        // dummy function to prevent error 
-    }
 
     handleListItemClick = (horseID) => {
         // setSelectedIndex(index);
@@ -68,8 +39,6 @@ export class ManageHorses extends Component {
         this.props.fetchSingleHorse(horseID);
     }
     
-
-
     renderHorseInfo(horse) {
       return (
         <CardContent>
@@ -137,7 +106,6 @@ export class ManageHorses extends Component {
                 {horses.map((value) => {
                   const labelId = `checkbox-list-label-${value.horseID}`;
                   return (
-                    // selected={this.selectedIndex === value} disabled
                     <ListItem 
                       key={value.horseID} 
                       role={undefined} 
