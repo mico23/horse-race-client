@@ -65,12 +65,13 @@ export const logoutUser = () => (dispatch) => {
 }
 
 // Signs user up
-export const signupUser = (userData) => (dispatch) => {
+export const signupUser = (userData, history) => (dispatch) => {
     dispatch({type: LOADING_USER});
 
     axios
         .post('/customer/signup.php', userData)
         .then((res) => {
+            dispatch(fetchInitialCustomerInfo(userData.username, history))
             dispatch({
                 type: SIGNUP_USER,
                 payload: userData

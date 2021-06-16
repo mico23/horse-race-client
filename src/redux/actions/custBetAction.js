@@ -14,6 +14,7 @@ export const fetchBetInfo = (accountid) => (dispatch) => {
                 type: CUSTOMER_BET_INFO,
                 payload: res.data.records
             });
+            console.log(res.data.records);
         })
         .catch((err) => {
             dispatch({
@@ -26,7 +27,8 @@ export const makeBet = (betData) => (dispatch) => {
     axios
         .post(`transaction/makeBet.php`, betData)
         .then((res) => {
-            dispatch(fetchBetInfo(betData.accountID));
+            console.log("success")
+            dispatch(fetchBetInfo(betData.accountid));
         })
         .catch((err) => {
             console.log(err);
