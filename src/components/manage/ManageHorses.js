@@ -74,18 +74,25 @@ export class ManageHorses extends Component {
               <Typography variant="h5" gutterBottom>
                 Horses
               </Typography>
-                <List className={classes.listRoot}>
-                  {horses.map((value) => {
-                    const labelId = `checkbox-list-label-${value}`;
-                    return (
-                      <ListItem key={value.horseID} role={undefined} button selected={this.selectedIndex === value} onClick={(event) => this.handleListItemClick(event, value)}>
-                        <ListItemText id={labelId} primary={value.nickname} />
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              </Grid>
-              <Grid item xs={4}>
+              
+              <List className={classes.listRoot}>
+                {horses.map((value) => {
+                  const labelId = `checkbox-list-label-${value.horseID}`;
+                  return (
+                    // selected={this.selectedIndex === value} disabled
+                    <ListItem 
+                      key={value.horseID} 
+                      role={undefined} 
+                      button
+                      onClick={(event) => this.handleListItemClick(event, value)}>
+                      <ListItemText id={labelId} primary={value.nickname}/>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            </Grid>
+             
+            <Grid item xs={4}>
               <Typography variant="h5" gutterBottom>
                 Horse Info
               </Typography>

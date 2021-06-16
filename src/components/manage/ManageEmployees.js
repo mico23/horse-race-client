@@ -138,6 +138,7 @@ export class ManageEmployees extends Component {
                   {employees.map((value) => {
                     const labelId = `checkbox-list-label-${value.accountID}`;
                     return (
+                      // selected={this.selectedIndex === value} disabled
                       <ListItem key={value.accountID} 
                                 role={undefined} 
                                 button
