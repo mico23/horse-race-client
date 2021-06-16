@@ -52,10 +52,8 @@ export default function (state = initialState, action) {
         case SIGNUP_USER:
             return {
                 ...state,
-                loading: false,
                 username: action.payload.username,
                 user: action.payload,
-                authenticated: true,
                 signupError: false
             };
         case SIGNUP_ERROR:

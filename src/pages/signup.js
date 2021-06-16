@@ -56,7 +56,7 @@ export class signup extends Component {
             type: this.state.type
         };
 
-        this.props.signupUser(userData);
+        this.props.signupUser(userData, this.props.history);
     }
 
     handleTextfieldChange = (event) => {
