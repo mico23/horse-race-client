@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 // Redux
 import { connect } from 'react-redux';
-import { logoutUser } from '../redux/actions/user';
+import { logoutUser } from '../redux/actions/userAction';
 
 // Material UI
 import AppBar from '@material-ui/core/AppBar';
@@ -32,7 +32,7 @@ export class NavBar extends Component {
                         </Grid>
                         <Grid item>
                             {authenticated && (
-                                <Button onClick={this.handleLogout} size="small" component={Link} to="/">
+                                <Button variant="contained" onClick={this.handleLogout} size="small" component={Link} to="/" style={{marginBottom: '15px'}}>
                                     Log Out
                                 </Button>
                             )}

@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar';
 
 // Redux
 import { connect } from 'react-redux';
-import { loginUser, setEmployee } from '../redux/actions/user';
+import { loginUser, setEmployee } from '../redux/actions/userAction';
 
 // Material UI
 import Grid from '@material-ui/core/Grid';
@@ -33,7 +33,7 @@ export class login extends Component {
             password: this.state.password
         };
 
-        this.props.loginUser(loginData);
+        this.props.loginUser(loginData, this.props.history);
     }
 
     handleSetEmployee = (event, newStatus) => {

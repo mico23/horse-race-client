@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 
 // Logs user in
-export const loginUser = (userData) => (dispatch) => {
+export const loginUser = (userData, history) => (dispatch) => {
     dispatch({type: LOADING_USER});
 
     const username = userData.username;
@@ -24,6 +24,7 @@ export const loginUser = (userData) => (dispatch) => {
                 payload: username
             });
             console.log("Authenticated");
+            history.push('/customer');
         })
         .catch((err) => {
             dispatch({type: LOGIN_ERROR});
@@ -39,7 +40,7 @@ export const setEmployee = (isEmployee) => (dispatch) => {
 }
 
 // Log user out
-export const logoutUser = (dispatch) => {
+export const logoutUser = () => (dispatch) => {
     dispatch({type: LOGOUT});
 }
 
