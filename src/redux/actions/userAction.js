@@ -5,7 +5,9 @@ import {
     SET_EMPLOYEE,
     LOGOUT,
     SIGNUP_USER,
-    SIGNUP_ERROR
+    SIGNUP_ERROR,
+    CUSTOMER_INFO,
+    CUSTOMER_INFO_FAIL
 } from '../types';
 import axios from 'axios';
 
@@ -19,16 +21,34 @@ export const loginUser = (userData, history) => (dispatch) => {
     axios
         .get(`/users/login.php?username='${username}'&password='${password}'`)
         .then((res) => {
-            dispatch({
-                type: AUTHENTICATE,
-                payload: username
-            });
             console.log("Authenticated");
-            history.push('/customer');
+            dispatch(fetchInitialCustomerInfo(username, history));
         })
         .catch((err) => {
             dispatch({type: LOGIN_ERROR});
         });
+}
+
+export const fetchInitialCustomerInfo = (username, history) => (dispatch) => {    
+    axios
+        .get(`/customer/customerInfo.php?username='${username}'`)
+        .then((res) => {
+            console.log(res.data);
+            dispatch({
+                type: CUSTOMER_INFO,
+                payload: res.data
+            });
+            history.push('/customer');
+            dispatch({
+                type: AUTHENTICATE,
+                payload: username
+            });
+        })
+        .catch((err) => {
+            dispatch({
+                type: CUSTOMER_INFO_FAIL
+            })
+        })
 }
 
 // Switch customer/employee status on login page

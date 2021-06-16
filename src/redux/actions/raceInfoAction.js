@@ -6,17 +6,17 @@ import {
     BET_TRUE,
     BET_FALSE,
     SET_RACE_LOCATION,
+    BET_DETAILS,
+    NO_HORSES_REGISTERED
 } from '../types';
 
 import axios from 'axios';
 
 export const fetchRaceStadiumInfo = () => (dispatch) => {
-    console.log('fetching race-stadium info');
 
     axios
         .get(`/race/stadiumInfo.php`)
         .then((res) => {
-            // console.log(res.data.records);
             dispatch({
                 type: RACE_STADIUM_INFO,
                 payload: res.data.records
@@ -30,7 +30,7 @@ export const fetchRaceStadiumInfo = () => (dispatch) => {
 }
 
 export const fetchRaceInfo = (raceid) => (dispatch) => {
-    console.log('fetching race info');
+
     axios
     .get(`/race/raceInfo.php?raceid=${raceid}`)
     .then((res)=>{
@@ -42,8 +42,11 @@ export const fetchRaceInfo = (raceid) => (dispatch) => {
         });
     })
     .catch((err) => {
+        if (err.response.status === 404) {
+            dispatch({type: NO_HORSES_REGISTERED});
+        }
         dispatch({
-            type:RACE_INFO_FAIL
+            type: RACE_INFO_FAIL
         })
     })
 }
@@ -71,5 +74,12 @@ export const setBetTrue = () => (dispatch) => {
 export const setBetFalse = () => (dispatch) => {
     dispatch({
         type: BET_FALSE
+    })
+}
+
+export const setBetDetails = (betDetails) => (dispatch) => {
+    dispatch({
+        type: BET_DETAILS,
+        payload: betDetails
     })
 }

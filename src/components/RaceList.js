@@ -27,14 +27,13 @@ export class RaceList extends Component {
     handleSelection = (raceIndex) => {
         this.props.setRaceLocation(raceIndex);
         this.props.fetchRaceInfo(raceIndex);
-        console.log(`current raceIndex: ${raceIndex}`);
     }
 
     renderRow(stadiums) {
         return stadiums.map((data)=> (
             <ListItem button key={data.raceid} onClick={() => this.handleSelection(data.raceid)}>
                 <ListItemText 
-                primary={`A Race is held at ${data.stadium_name}; race type:${data.race_type}`}
+                primary={`A Race is held at ${data.stadium_name}; race type: ${data.race_type}`}
                 secondary={`on ${data.race_date}; Location: ${data.stadium_address}`} 
                 />
             </ListItem>
@@ -49,7 +48,7 @@ export class RaceList extends Component {
             <div>
                 <Grid item xs={12}>
                     <Typography variant="h6" className={classes.title}>
-                        Currnt Race Information
+                        Current Race Information
                     </Typography>
                     <List className={classes.root} subheader={<li />}>
                     {

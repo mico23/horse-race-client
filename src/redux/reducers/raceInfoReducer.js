@@ -6,17 +6,19 @@ import {
     BET_TRUE,
     BET_FALSE,
     SET_RACE_LOCATION,
+    BET_DETAILS,
+    NO_HORSES_REGISTERED
 } from '../types';
 
 const initialState = {
-    stadiums:[],
-    races:[],
-    //raceLoacton = raceID
+    stadiums: [],
+    races: [],
     raceLocation: 0,
-    //curBetType is used for making the post bet request to the end point
     curBetType: '',
-    // bet is to toggle the dialog window when making a bet
     bet: false,
+    selectedHorse: 0,
+    selectedRace: 0,
+    noHorsesRegistered: false
 }
 
 export default function (state =initialState, action) {
@@ -41,7 +43,8 @@ export default function (state =initialState, action) {
         case RACE_INFO:
             return {
                 ...state,
-                races: action.payload
+                races: action.payload,
+                noHorsesRegistered: false
             }
         case RACE_INFO_FAIL:
             return {
@@ -72,6 +75,16 @@ export default function (state =initialState, action) {
             return {
                 ...state,
                 bet: false
+            }
+        case BET_DETAILS:
+            return {
+                ...state,
+                selectedHorse: action.payload.horseid,
+            }
+        case NO_HORSES_REGISTERED:
+            return {
+                ...state,
+                noHorsesRegistered: true
             }
         default:
             return state;

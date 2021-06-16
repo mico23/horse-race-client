@@ -25,10 +25,6 @@ export class Customer extends Component {
         this.handleProfile = this.handleProfile.bind(this);
     }
 
-    componentDidMount() {
-        this.props.fetchCustomerInfo('jsmith123');
-    }
-
     handleMemberShip = (event) => {
         this.props.displayMemberInfo();
         // console.log(this.props.customer.display);
@@ -46,7 +42,7 @@ export class Customer extends Component {
         return (
             <div className={classes.root}>
                 <NavBar/>
-                <Container maxWidth="lg" style={{marginTop: '150px'}}>
+                <Container maxWidth="lg" style={{marginTop: '100px'}}>
                     <h1>Welcome {this.props.customer.name}</h1>
                     <Grid container spacing={2} justify="center" alignItems="center" style={{height: '500px'}}>
                   
@@ -87,6 +83,7 @@ export class Customer extends Component {
 
 const mapStateToProps = state => ({
     customer: state.customer,
+    user: state.user
 })
 
 const mapActionsToProps = {
