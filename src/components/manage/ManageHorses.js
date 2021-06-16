@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { setCurHorseID, fetchSingleHorse } from '../../redux/actions/horseAction';
+
 import { 
     Button, 
     Grid,
@@ -55,17 +57,72 @@ export class ManageHorses extends Component {
       // see from General
     }
 
-    handleListItemClick = (horseID) => {
-        // setSelectedIndex(index);
-        console.log(horseID)
-    }
-    
     selectedIndex = ()=> {
         // dummy function to prevent error 
     }
 
+    handleListItemClick = (horseID) => {
+        // setSelectedIndex(index);
+        console.log(horseID)
+        this.props.setCurHorseID(horseID);
+        this.props.fetchSingleHorse(horseID);
+    }
+    
+
+
+    renderHorseInfo(horse) {
+      return (
+        <CardContent>
+          <Typography variant="h6" component="h2" gutterBottom>
+            {horse.nickname}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Horse ID
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {horse.curHorseID}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Breed
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {horse.curBreed}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Age (years)
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {horse.curAge}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Odds
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {horse.curODDs}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Number of races participated
+          </Typography>
+          <Typography variant="body1" component="p" gutterBottom>
+            {horse.curNumraces}
+          </Typography>
+        </CardContent>
+      )
+    }
+
+    // ** this is not displayed properly. I will fix it later.
+    displayDefaultMessage() {
+      return (
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Please select a Horse.
+          </Typography>
+        </CardContent>
+      )
+    }
+
     render() {
-      const {classes, horses, horse} = this.props;
+      const {classes, horses, horse, curHorseID} = this.props;
     //   const [selectedIndex, setSelectedIndex] = React.useState(1);
 
         return (
@@ -85,8 +142,13 @@ export class ManageHorses extends Component {
                       key={value.horseID} 
                       role={undefined} 
                       button
-                      onClick={(event) => this.handleListItemClick(value.horseID)}>
-                      <ListItemText id={labelId} primary={value.nickname}/>
+                      onClick={() => this.handleListItemClick(value.horseID)}>
+                      <ListItemText 
+                      id={labelId} 
+                      primary={
+                        `${value.nickname != null ? value.nickname : 'No Name'} - 
+                        ID: ${value.horseID}`
+                      }/>
                     </ListItem>
                   );
                 })}
@@ -97,53 +159,15 @@ export class ManageHorses extends Component {
               <Typography variant="h5" gutterBottom>
                 Horse Info
               </Typography>
+
               <Card className={classes.listRoot} variant="outlined">
-                <CardContent>
-                  <Typography variant="h6" component="h2" gutterBottom>
-                    {horse.nickname}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Horse ID
-                  </Typography>
-                  <Typography variant="body1" component="p" gutterBottom>
-                    {horse.horseID}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Breed
-                  </Typography>
-                  <Typography variant="body1" component="p" gutterBottom>
-                    {horse.breed}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Age (years)
-                  </Typography>
-                  <Typography variant="body1" component="p" gutterBottom>
-                    {horse.age}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Odds
-                  </Typography>
-                  <Typography variant="body1" component="p" gutterBottom>
-                    {horse.odds}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    Number of races participated
-                  </Typography>
-                  <Typography variant="body1" component="p" gutterBottom>
-                    {horse.numraces}
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small" color="primary" onClick={(event) => this.handleManage(event)}>View records</Button>
-                  <Button size="small" color="primary" onClick={(event) => this.handleDelete(event)}>Delete</Button>
-                </CardActions>
+                {
+                  curHorseID != 0 ? this.renderHorseInfo(horse) : this.displayDefaultMessage()
+                }
               </Card>
               </Grid>
               <Grid item xs={12}>
               </Grid>
-              <Button variant="outlined" color="primary" onClick={this.handleOpenDialog}>
-                Add Horse
-              </Button>
             </Grid>
           </div>
         )
@@ -152,7 +176,13 @@ export class ManageHorses extends Component {
 
 const mapStateToProps = state => ({
     horses: state.horsesInfo.horses,
-    horse: state.horsesInfo
+    horse: state.horsesInfo,
+    curHorseID: state.horsesInfo.curHorseID
 })
 
-export default connect(mapStateToProps, null)(withStyles(styles)(ManageHorses));
+const mapActionsToProps = {
+  setCurHorseID,
+  fetchSingleHorse
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(ManageHorses));

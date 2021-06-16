@@ -36,8 +36,11 @@ export const EMPLOYEE_INFO_FAIL = 'EMPLOYEE_INFO_FAIL';
 export const SET_CUR_EMP_ACC_ID = 'SET_CUR_EMP_ACC_ID';
 
 // types I'm currently working on
+export const ALL_HORSE_INFO = 'ALL_HORSE_INFO';
+export const ALL_HORSE_INFO_FAIL = 'ALL_HORSE_INFO_FAIL';
 export const HORSE_INFO = 'HORSE_INFO';
 export const HORSE_INFO_FAIL = 'HORSE_INFO_FAIL';
+export const SET_CUR_HORSE_ID = 'SET_CUR_HORSE_ID'
 
 // new types in Jenny's file - not used yet
 
