@@ -2,7 +2,9 @@ import {
     ALL_HORSE_INFO,
     ALL_HORSE_INFO_FAIL,
     HORSE_INFO,
-    HORSE_INFO_FAIL
+    HORSE_INFO_FAIL,
+    SUPER_HORSE,
+    SUPER_HORSE_FAIL
 } from '../types';
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
     curODDs: 0,
     curBreed:"",
     curNumraces: 0,
-    curAge:0
+    curAge:0,
+    superHorseID:0
 }
 
 export default function (state = initialState, action) {
@@ -37,6 +40,16 @@ export default function (state = initialState, action) {
             }
         case HORSE_INFO_FAIL:
             return state;
+        case SUPER_HORSE:
+            return {
+                ...state,
+                superHorseID: action.payload.horseID
+            }
+        case SUPER_HORSE:
+            return {
+                ...state,
+                superHorseID: 0
+            }
         default:
             return state;
     }

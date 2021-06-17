@@ -39,6 +39,9 @@ export const ALL_HORSE_INFO = 'ALL_HORSE_INFO';
 export const ALL_HORSE_INFO_FAIL = 'ALL_HORSE_INFO_FAIL';
 export const HORSE_INFO = 'HORSE_INFO';
 export const HORSE_INFO_FAIL = 'HORSE_INFO_FAIL';
+// new added
+export const SUPER_HORSE = 'SUPER_HORSE';
+export const SUPER_HORSE_FAIL = 'SUPER_HORSE_FAIL';
 
 export const ALL_JOCKEY_INFO = 'ALL_JOCKEY_INFO';
 export const ALL_JOCKEY_INFO_FAIL = 'ALL_JOCKEY_INFO_FAIL';

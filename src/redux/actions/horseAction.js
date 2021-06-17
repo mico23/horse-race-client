@@ -3,6 +3,8 @@ import {
     ALL_HORSE_INFO_FAIL,
     HORSE_INFO,
     HORSE_INFO_FAIL,
+    SUPER_HORSE,
+    SUPER_HORSE_FAIL
 } from '../types';
 import axios from 'axios';
 
@@ -41,6 +43,24 @@ export const fetchSingleHorse = (horseID) => (dispatch) => {
         .catch((err) => {
             dispatch({
                 type: HORSE_INFO_FAIL
+            })
+        })
+}
+
+// get a horse particiapted in all races 
+export const fetchSuperHorse = () => (dispatch) => {
+    axios
+        .get(`/horse/superHorse.php`)
+        .then((res) => {
+            // console.log(res.data);
+            dispatch({
+                type: SUPER_HORSE,
+                payload: res.data
+            });
+        })
+        .catch((err) => {
+            dispatch({
+                type: SUPER_HORSE_FAIL
             })
         })
 }

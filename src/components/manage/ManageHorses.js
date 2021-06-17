@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchSingleHorse } from '../../redux/actions/horseAction';
+import { fetchSingleHorse, fetchSuperHorse } from '../../redux/actions/horseAction';
 
 import { 
     Grid,
@@ -34,6 +34,8 @@ export class ManageHorses extends Component {
 
     handleListItemClick = (horseID) => {
         this.props.fetchSingleHorse(horseID);
+        this.props.fetchSuperHorse();
+        
     }
     
     renderHorseInfo(horse) {
@@ -87,7 +89,7 @@ export class ManageHorses extends Component {
     }
 
     render() {
-      const {classes, horses, horse, curHorseID} = this.props;
+      const {classes, horses, horse, curHorseID, superHorseID} = this.props;
         return (
             <div className={classes.root}>
             <Grid container spacing={3} justify="center" alignItems="center">
@@ -108,9 +110,13 @@ export class ManageHorses extends Component {
                       <ListItemText 
                       id={labelId} 
                       primary={
-                        `${value.nickname != null ? value.nickname : 'No Name'} - 
-                        ID: ${value.horseID}`
-                      }/>
+                        `${value.nickname != null ? value.nickname : 'No Name'}`
+                      }
+                      secondary={
+                        `ID: ${value.horseID}; 
+                        MVP: ${superHorseID == value.horseID ? 'Yes' : 'No'}`
+                      }
+                      />
                     </ListItem>
                   );
                 })}
@@ -139,11 +145,13 @@ export class ManageHorses extends Component {
 const mapStateToProps = state => ({
     horses: state.horsesInfo.horses,
     horse: state.horsesInfo,
-    curHorseID: state.horsesInfo.curHorseID
+    curHorseID: state.horsesInfo.curHorseID,
+    superHorseID: state.horsesInfo.superHorseID
 })
 
 const mapActionsToProps = {
-  fetchSingleHorse
+  fetchSingleHorse,
+  fetchSuperHorse
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(ManageHorses));
