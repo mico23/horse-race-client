@@ -10,7 +10,8 @@ const initialState = {
     jockeyid:0,
     name: "",
     years_of_exp: "",
-    horse_club: ""
+    horse_club: "",
+    num_of_horse_ridden: 0
 }
 
 export default function (state = initialState, action) {
@@ -28,7 +29,8 @@ export default function (state = initialState, action) {
                 jockeyid: action.payload.horseID,
                 name: action.payload.jName,
                 years_of_exp: action.payload.years_of_exp,
-                horse_club: action.payload.hName
+                horse_club: action.payload.hName,
+                num_of_horse_ridden: action.payload.num_of_horse_ridden
             }
         case JOCKEY_INFO_FAIL:
             return state;

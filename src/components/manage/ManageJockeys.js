@@ -61,7 +61,7 @@ export class ManageJockeys extends Component {
             {jockey.years_of_exp}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            jockey club
+            Horse club
           </Typography>
           <Typography variant="body1" component="p" gutterBottom>
             {jockey.horse_club}
@@ -105,9 +105,11 @@ export class ManageJockeys extends Component {
                       <ListItemText 
                       id={labelId} 
                       primary={
-                        `${value.name} - 
-                        ID: ${value.jockeyid}`
-                      }/>
+                        `${value.name}`
+                      }
+                      secondary={`ID: ${value.jockeyid}; Num of Horses Ridden: ${value.num_of_horse_ridden}`} 
+                      />
+                      
                     </ListItem>
                   );
                 })}
