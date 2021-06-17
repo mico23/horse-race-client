@@ -45,12 +45,6 @@ export const ALL_JOCKEY_INFO_FAIL = 'ALL_JOCKEY_INFO_FAIL';
 export const JOCKEY_INFO = 'JOCKEY_INFO';
 export const JOCKEY_INFO_FAIL = 'JOCKEY_INFO_FAIL';
 
-
-// export const ALL_RACE_INFO = 'ALL_RACE_INFO';
-// export const ALL_RACE_INFO_FAIL = 'ALL_RACE_INFO_FAIL';
-// export const RACE_INFO = 'RACE_INFO';
-// export const RACE_INFO_FAIL = 'RACE_INFO_FAIL';
-
 export const ALL_STADIUM_INFO = 'ALL_STADIUM_INFO';
 export const ALL_STADIUM_INFO_FAIL = 'ALL_STADIUM_INFO_FAIL';
 export const STADIUM_INFO = 'STADIUM_INFO';

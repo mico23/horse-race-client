@@ -66,8 +66,8 @@ export const addEmployee = (edata) => (dispatch) => {
   axios
     .post(`/employee/addemployee.php`, edata)
     .then((res)=>{
-        console.log("printing out response")
-        console.log(res.data);
+        // console.log("printing out response")
+        // console.log(res.data);
         dispatch({
             type: ADD_EMPLOYEE,
             payload: edata

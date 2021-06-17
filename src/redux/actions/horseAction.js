@@ -32,7 +32,7 @@ export const fetchSingleHorse = (horseID) => (dispatch) => {
     axios
         .get(`/horse/horseInfo.php?horseid=${horseID}`)
         .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             dispatch({
                 type: HORSE_INFO,
                 payload: res.data

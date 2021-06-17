@@ -76,7 +76,6 @@ export class ManageHorses extends Component {
       )
     }
 
-    // ** this is not displayed properly. I will fix it later.
     displayDefaultMessage() {
       return (
         <CardContent>
@@ -89,8 +88,6 @@ export class ManageHorses extends Component {
 
     render() {
       const {classes, horses, horse, curHorseID} = this.props;
-    //   const [selectedIndex, setSelectedIndex] = React.useState(1);
-
         return (
             <div className={classes.root}>
             <Grid container spacing={3} justify="center" alignItems="center">

@@ -68,7 +68,6 @@ export class ManageSuppliers extends Component {
       )
     }
 
-    // ** this is not displayed properly. I will fix it later.
     displayDefaultMessage() {
       return (
         <CardContent>
