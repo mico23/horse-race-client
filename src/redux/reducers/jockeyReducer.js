@@ -25,10 +25,10 @@ export default function (state = initialState, action) {
         case JOCKEY_INFO:
             return {
                 ...state,
-                jockeyid:0,
-                name: "",
-                years_of_exp: "",
-                horse_club: ""
+                jockeyid: action.payload.horseID,
+                name: action.payload.jName,
+                years_of_exp: action.payload.years_of_exp,
+                horse_club: action.payload.hName
             }
         case JOCKEY_INFO_FAIL:
             return state;

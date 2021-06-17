@@ -14,10 +14,10 @@ import EmployeeRegular from './pages/EmployeeRegular';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-axios.defaults.baseURL = 'https://www.students.cs.ubc.ca/~schung53/horse-race-api';
+// axios.defaults.baseURL = 'https://www.students.cs.ubc.ca/~schung53/horse-race-api';
 
 // for jenny's components, try to use this link
-// axios.defaults.baseURL = 'https://www.students.cs.ubc.ca/~enxie/horse-race-api';
+axios.defaults.baseURL = 'https://www.students.cs.ubc.ca/~enxie/horse-race-api';
 
 function App() {
   return (

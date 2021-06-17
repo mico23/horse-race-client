@@ -8,7 +8,7 @@ import axios from 'axios';
 
 // fetch all jockey info
 export const fetchAllJockeys = () => (dispatch) => {
-    // console.log('fetching all horses info');
+    console.log('fetching all jockey info');
     axios
         .get(`/jockey/allJockeyInfo.php`)
         .then((res) => {

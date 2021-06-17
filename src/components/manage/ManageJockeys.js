@@ -105,7 +105,7 @@ export class ManageJockeys extends Component {
                       <ListItemText 
                       id={labelId} 
                       primary={
-                        `${value.nickname != null ? value.nickname : 'No Name'} - 
+                        `${value.name} - 
                         ID: ${value.jockeyid}`
                       }/>
                     </ListItem>
