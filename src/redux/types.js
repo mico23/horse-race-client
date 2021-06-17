@@ -35,12 +35,31 @@ export const EMPLOYEE_INFO_FAIL = 'EMPLOYEE_INFO_FAIL';
 
 export const SET_CUR_EMP_ACC_ID = 'SET_CUR_EMP_ACC_ID';
 
-// types I'm currently working on
 export const ALL_HORSE_INFO = 'ALL_HORSE_INFO';
 export const ALL_HORSE_INFO_FAIL = 'ALL_HORSE_INFO_FAIL';
 export const HORSE_INFO = 'HORSE_INFO';
 export const HORSE_INFO_FAIL = 'HORSE_INFO_FAIL';
-export const SET_CUR_HORSE_ID = 'SET_CUR_HORSE_ID'
+
+export const ALL_JOCKEY_INFO = 'ALL_JOCKEY_INFO';
+export const ALL_JOCKEY_INFO_FAIL = 'ALL_JOCKEY_INFO_FAIL';
+export const JOCKEY_INFO = 'JOCKEY_INFO';
+export const JOCKEY_INFO_FAIL = 'JOCKEY_INFO_FAIL';
+
+
+// export const ALL_RACE_INFO = 'ALL_RACE_INFO';
+// export const ALL_RACE_INFO_FAIL = 'ALL_RACE_INFO_FAIL';
+// export const RACE_INFO = 'RACE_INFO';
+// export const RACE_INFO_FAIL = 'RACE_INFO_FAIL';
+
+export const ALL_STADIUM_INFO = 'ALL_STADIUM_INFO';
+export const ALL_STADIUM_INFO_FAIL = 'ALL_STADIUM_INFO_FAIL';
+export const STADIUM_INFO = 'STADIUM_INFO';
+export const STADIUM_INFO_FAIL = 'STADIUM_INFO_FAIL';
+
+export const ALL_SUPPLIER_INFO = 'ALL_SUPPLIER_INFO';
+export const ALL_SUPPLIER_INFO_FAIL = 'ALL_SUPPLIER_INFO_FAIL';
+export const SUPPLIER_INFO = 'SUPPLIER_INFO';
+export const SUPPLIER_INFO_FAIL = 'SUPPLIER_INFO_FAIL';
 
 // new types in Jenny's file - not used yet
 

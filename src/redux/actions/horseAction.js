@@ -3,7 +3,6 @@ import {
     ALL_HORSE_INFO_FAIL,
     HORSE_INFO,
     HORSE_INFO_FAIL,
-    SET_CUR_HORSE_ID
 } from '../types';
 import axios from 'axios';
 
@@ -45,26 +44,3 @@ export const fetchSingleHorse = (horseID) => (dispatch) => {
             })
         })
 }
-
-export const setCurHorseID = (horseID) => (dispatch) => {
-    dispatch({
-        type: SET_CUR_HORSE_ID,
-        payload: horseID
-    })
-}
-
-// // add horse
-// export const addHorse = (hdata) => (dispatch) => {
-//     // console.log('adding');
-//     // console.log(hdata);
-//     axios
-//       .post(`/horse/addhorse.php`, hdata)
-//       .then((res)=>{
-//           console.log("printing out response")
-//           console.log(res.data);
-//           dispatch({
-//               type: ADD_HORSE,
-//               payload: hdata
-//           })
-//       })
-//   }

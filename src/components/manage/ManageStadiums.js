@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { setCurHorseID, fetchSingleHorse } from '../../redux/actions/horseAction';
+import { fetchSingleHorse } from '../../redux/actions/horseAction';
+import { fetchSingleStadium } from '../../redux/actions/stadiumAction';
 
 import { 
     Grid,
@@ -30,38 +31,35 @@ const styles = (theme) => ({
 
 
 
-export class ManageHorses extends Component {
+export class ManageStadiums extends Component {
 
-    handleListItemClick = (horseID) => {
-        // setSelectedIndex(index);
-        console.log(horseID)
-        this.props.setCurHorseID(horseID);
-        this.props.fetchSingleHorse(horseID);
+    handleListItemClick = (address) => {
+        this.props.fetchSingleStadium(address);
     }
     
-    renderHorseInfo(horse) {
+    renderInfo(stadium) {
       return (
         <CardContent>
           <Typography variant="h6" component="h2" gutterBottom>
-            {horse.nickname}
+            {stadium.nickname}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Stadium Name
           </Typography>
           <Typography variant="body1" component="p" gutterBottom>
-            {horse.curHorseID}
+            {stadium.curHorseID}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             Address
           </Typography>
           <Typography variant="body1" component="p" gutterBottom>
-            {horse.curBreed}
+            {stadium.curBreed}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
              Capacity
           </Typography>
           <Typography variant="body1" component="p" gutterBottom>
-            {horse.curAge}
+            {stadium.curAge}
           </Typography>
         </CardContent>
       )
@@ -72,15 +70,14 @@ export class ManageHorses extends Component {
       return (
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
-            Please select a Horse.
+            Please select a Stadium.
           </Typography>
         </CardContent>
       )
     }
 
     render() {
-      const {classes, horses, horse, curHorseID} = this.props;
-    //   const [selectedIndex, setSelectedIndex] = React.useState(1);
+      const {classes, stadiums, stadium, curStadiumAddr} = this.props;
 
         return (
             <div className={classes.root}>
@@ -91,19 +88,19 @@ export class ManageHorses extends Component {
               </Typography>
               
               <List className={classes.listRoot}>
-                {horses.map((value) => {
-                  const labelId = `checkbox-list-label-${value.horseID}`;
+                {stadiums.map((value) => {
+                  const labelId = `checkbox-list-label-${value.address}`;
                   return (
                     <ListItem 
-                      key={value.horseID} 
+                      key={value.address} 
                       role={undefined} 
                       button
-                      onClick={() => this.handleListItemClick(value.horseID)}>
+                      onClick={() => this.handleListItemClick(value.address)}>
                       <ListItemText 
                       id={labelId} 
                       primary={
                         `${value.nickname != null ? value.nickname : 'No Name'} - 
-                        ID: ${value.horseID}`
+                        ID: ${value.address}`
                       }/>
                     </ListItem>
                   );
@@ -118,7 +115,7 @@ export class ManageHorses extends Component {
 
               <Card className={classes.listRoot} variant="outlined">
                 {
-                  curHorseID != 0 ? this.renderHorseInfo(horse) : this.displayDefaultMessage()
+                  curStadiumAddr != 0 ? this.renderInfo(stadium) : this.displayDefaultMessage()
                 }
               </Card>
               </Grid>
@@ -131,14 +128,13 @@ export class ManageHorses extends Component {
 }
 
 const mapStateToProps = state => ({
-    horses: state.horsesInfo.horses,
-    horse: state.horsesInfo,
-    curHorseID: state.horsesInfo.curHorseID
+  stadiums: state.stadiumInfo.stadiums,
+  stadium: state.stadiumInfo,
+  curStadiumAddr: state.stadiumInfo.curStadiumAddr
 })
 
 const mapActionsToProps = {
-  setCurHorseID,
-  fetchSingleHorse
+  fetchSingleStadium
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(ManageHorses));
+export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(ManageStadiums));

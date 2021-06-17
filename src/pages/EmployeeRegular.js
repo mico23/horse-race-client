@@ -11,6 +11,9 @@ import ManageSuppliers from '../components/manage/ManageSuppliers';
 // redux
 import { connect } from 'react-redux';
 import { fetchAllHorses } from '../redux/actions/horseAction';
+import { fetchAllJockeys } from '../redux/actions/jockeyAction';
+import { fetchAllStadiums } from '../redux/actions/stadiumAction';
+import { fetchAllSuppliers } from '../redux/actions/supplierAction';
 
 export class EmployeeRegular extends Component {
 
@@ -27,7 +30,7 @@ export class EmployeeRegular extends Component {
 
                 <ManageJockeys/>
 
-                <ManageRaces/>
+                {/* <ManageRaces/> */}
 
                 <ManageStadiums/>
 
@@ -37,8 +40,12 @@ export class EmployeeRegular extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    horses: state.horses
-})
 
-export default connect(mapStateToProps,{fetchAllHorses})(EmployeeRegular);
+const mapActionsToProps = {
+    fetchAllHorses,
+    fetchAllJockeys,
+    fetchAllStadiums,
+    fetchAllSuppliers
+}
+
+export default connect(null ,mapActionsToProps)(EmployeeRegular);

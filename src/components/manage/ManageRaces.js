@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { setCurHorseID, fetchSingleHorse } from '../../redux/actions/horseAction';
+import { fetchSingleHorse } from '../../redux/actions/horseAction';
 
 import { 
     Grid,
@@ -33,9 +33,6 @@ const styles = (theme) => ({
 export class ManageHorses extends Component {
 
     handleListItemClick = (horseID) => {
-        // setSelectedIndex(index);
-        console.log(horseID)
-        this.props.setCurHorseID(horseID);
         this.props.fetchSingleHorse(horseID);
     }
     
@@ -143,7 +140,6 @@ const mapStateToProps = state => ({
 })
 
 const mapActionsToProps = {
-  setCurHorseID,
   fetchSingleHorse
 }
 
